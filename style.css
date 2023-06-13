@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
-  color: #ffffff;
+  color: #030000;
 }
 
 body{
@@ -11,7 +11,7 @@ body{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #212121;
+  background-color: #c47225;
 }
 
 .container{
@@ -40,7 +40,7 @@ body{
 .clock span b{
   transform: rotate(calc(-30deg * var(--i)));
   display: inline-block;
-  font-size: 20px;
+  font-size: 40px;
 }
 
 .clock::before{
@@ -62,7 +62,7 @@ body{
 .hand i{
   position: absolute;
   background-color: var(--clr);
-  width: 4px;
+  width: 10px;
   height: var(--h);
   border-radius: 8px;
 }
