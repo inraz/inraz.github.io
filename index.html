@@ -12,18 +12,23 @@
       body {
                margin: 0;
                font-family: 'Roboto', sans-serif;
-               background-color: #1f252e;
+               background-color: #07162c;
                color: #fff;
                display: flex;
                flex-direction: column;
                min-height: 100vh;
+           }
+           .logo {
+               font-size: 1.5rem;
+               font-weight: bold;
+               color: #fc0404;
            }
            .navbar {
                display: flex;
                justify-content: space-between;
                align-items: center;
                padding: 1rem 2rem;
-               background-color: #1f252e;
+               background-color: #07162c;
            }
            .navbar .logo {
                font-size: 1.5rem;
@@ -61,7 +66,7 @@
                gap: 1rem;
            }
            .card {
-               background-color: #555;
+               background-color: #01122c;
                border-radius: 8px;
                overflow: hidden;
                width: calc(25% - 1rem);
@@ -83,7 +88,7 @@
                font-size: 0.9rem;
            }
            .footer {
-               background-color: #1f252e;
+               background-color: #07162c;
                padding: 1rem;
                text-align: center;
            }
@@ -145,16 +150,18 @@
                    display: none;
                    flex-direction: column;
                    gap: 0;
-                   background-color: #444;
+                   margin-right: 10px;
+                   background-color: #15253d;
                    position: absolute;
                    top: 60px;
                    right: 0;
-                   width: 100%;
+                   width: 50%;
+                   border-radius: 13px;
                    text-align: center;
                }
                .navbar .menu a {
                    padding: 1rem;
-                   border-top: 1px solid #555;
+                   border-top: 1px solid #07162c;
                }
                .navbar .menu-button {
                    display: block;
@@ -235,20 +242,20 @@
      </div>
      <footer class="footer">
       <div class="social-media">
-       <a href="#" target="_blank">
+       <a href="https://facebook.com" target="_blank">
         <i class="fab fa-facebook-f">
         </i>
        </a>
-       <a href="#" target="_blank">
-        <i class="fab fa-twitter">
+       <a href="https://m.youtube.com" target="_blank">
+        <i class="fab fa-youtube">
         </i>
        </a>
-       <a href="#" target="_blank">
+       <a href="https://instagram.com" target="_blank">
         <i class="fab fa-instagram">
         </i>
        </a>
-       <a href="#" target="_blank">
-        <i class="fab fa-linkedin-in">
+       <a href="https://github.com" target="_blank">
+        <i class="fab fa-github">
         </i>
        </a>
       </div>
@@ -257,7 +264,7 @@
       </div>
      </footer>
      <script>
-      const apiKey = 'YOUR_API_KEY';
+      const apiKey = '';
            const apiBaseUrl = 'https://api.themoviedb.org/3';
            const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
    
@@ -365,7 +372,7 @@
    
            function toggleMenu() {
                const menu = document.querySelector('.navbar .menu');
-               menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+               menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
            }
    
            function showSection(sectionId) {
