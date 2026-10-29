@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160b11">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Management Portal | Velvet Touch Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- AUTHENTICATION SCREEN -->
+  <div id="admin-auth" class="admin-login-wrap">
+    <div class="admin-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:15px">
+        <span class="brand-mark">VT</span>
+        <div>
+          <span style="font:20px var(--serif);display:block">Velvet Touch Spa</span>
+          <small style="color:var(--gold);font-size:9px;letter-spacing:.2em">MANAGEMENT PORTAL</small>
+        </div>
+      </div>
+      <h2>Staff & Studio Control</h2>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:24px">
+        Please enter the administrative access key to manage therapists, gallery media, appointments, and payments.
+      </p>
+      <form id="admin-login-form">
+        <label style="display:grid;gap:8px;font-size:12px;color:var(--gold);margin-bottom:18px">
+          Security Password
+          <input type="password" id="admin-pass-input" placeholder="Enter portal password" required autocomplete="current-password" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text);border-radius:2px">
+        </label>
+        <button type="submit" class="button button-gold" style="width:100%">Access Portal ↗</button>
+        <p id="admin-auth-msg" style="color:#f99;font-size:12px;margin-top:12px" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD -->
+  <div id="admin-dashboard" style="display:none">
+    <header class="admin-header">
+      <div class="admin-title">
+        <span class="brand-mark">VT</span>
+        <div>
+          <strong>Velvet Touch Spa</strong>
+          <span style="display:block;font-size:10px;color:var(--gold);letter-spacing:.18em">EXECUTIVE ADMIN CONSOLE</span>
+        </div>
+      </div>
+      <nav class="admin-nav">
+        <button class="admin-tab-btn active" data-tab="tab-bookings">Bookings & Enquiries (<span id="count-bookings">0</span>)</button>
+        <button class="admin-tab-btn" data-tab="tab-staff">Staff Management</button>
+        <button class="admin-tab-btn" data-tab="tab-gallery">Photo & Video Gallery</button>
+        <button class="admin-tab-btn" data-tab="tab-contact">Contact & Location</button>
+        <button class="admin-tab-btn" data-tab="tab-payments">Payment & Banking</button>
+        <a href="index.html" class="admin-tab-btn" style="border-color:var(--gold)">View Live Site ↗</a>
+        <button id="admin-logout-btn" class="admin-tab-btn btn-danger">Lock Portal</button>
+      </nav>
+    </header>
+
+    <main class="admin-body">
+      <!-- 1. BOOKINGS & INCOMING ENQUIRIES TAB -->
+      <section id="tab-bookings" class="admin-tab-content active">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>Service Bookings & Client Requests</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Manage incoming appointments, payment verifications, and guest communications.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button id="export-bookings-btn" class="button button-outline btn-sm">Export to CSV</button>
+              <button id="clear-bookings-btn" class="button btn-danger btn-sm">Clear Completed</button>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto">
+            <table class="admin-table" id="bookings-table">
+              <thead>
+                <tr>
+                  <th>Ref ID</th>
+                  <th>Date & Time</th>
+                  <th>Guest Name</th>
+                  <th>Contact</th>
+                  <th>Service Requested</th>
+                  <th>Payment Info</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>Incoming Website Enquiries & Mail</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Questions sent from the contact page form.</p>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Ref</th>
+                  <th>Received</th>
+                  <th>From</th>
+                  <th>Topic</th>
+                  <th>Message</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="enquiries-tbody">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. STAFF MANAGEMENT TAB -->
+      <section id="tab-staff" class="admin-tab-content">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>Care Team & Therapist Management</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Update staff names, specializations, biographies, and portraits.</p>
+            </div>
+            <button id="add-staff-btn" class="button button-gold btn-sm">+ Add New Therapist</button>
+          </div>
+
+          <div class="admin-card-grid" id="admin-staff-grid">
+            <!-- Dynamically rendered staff cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. GALLERY MANAGEMENT TAB -->
+      <section id="tab-gallery" class="admin-tab-content">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>Spa Photographs & Video Media</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">Add or delete media displayed in the public gallery.</p>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button id="add-photo-btn" class="button button-gold btn-sm">+ Add Photo</button>
+              <button id="add-video-btn" class="button button-outline btn-sm">+ Add Video (MP4)</button>
+            </div>
+          </div>
+
+          <div class="admin-card-grid" id="admin-gallery-grid">
+            <!-- Dynamically rendered gallery cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. LOCATION & CONTACT INFORMATION TAB -->
+      <section id="tab-contact" class="admin-tab-content">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>Contact Details, WhatsApp & Location Settings</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">All public contact points, telephone links, and map embeds sync immediately.</p>
+            </div>
+          </div>
+
+          <form id="admin-contact-form">
+            <div class="admin-grid-2">
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Reception Phone Number
+                <input type="text" id="setting-phone" required class="contact-form-input" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                WhatsApp Number (with country code, no + or spaces)
+                <input type="text" id="setting-whatsapp" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)" placeholder="e.g. 918662449010">
+              </label>
+            </div>
+
+            <div class="admin-grid-2">
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Pre-filled WhatsApp Greeting Message
+                <input type="text" id="setting-whatsapp-msg" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Official Spa Email Address
+                <input type="email" id="setting-email" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+            </div>
+
+            <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+              Physical Studio Address
+              <textarea id="setting-address" rows="2" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)"></textarea>
+            </label>
+
+            <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+              Google Maps Embed URL (iframe src)
+              <input type="url" id="setting-map" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+            </label>
+
+            <div class="admin-panel-head" style="margin-top:20px">
+              <h4 style="margin:0;font:20px var(--serif)">Care Team Privacy Mode</h4>
+            </div>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px">
+              <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+                <input type="radio" name="privacy-mode-radio" value="resilient"> AI Camera Check with Auto-Fallback (Default)
+              </label>
+              <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+                <input type="radio" name="privacy-mode-radio" value="manual"> Guest Tap-to-Reveal (No Camera needed)
+              </label>
+              <label style="display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer">
+                <input type="radio" name="privacy-mode-radio" value="always_show"> Always Visible (Direct portraits)
+              </label>
+            </div>
+
+            <button type="submit" class="button button-gold">Save Contact & Location Settings ↗</button>
+            <span id="contact-save-status" style="margin-left:14px;color:var(--gold);font-size:12px"></span>
+          </form>
+        </div>
+      </section>
+
+      <!-- 5. PAYMENT & BANKING CONFIGURATION TAB -->
+      <section id="tab-payments" class="admin-tab-content">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <h3>UPI, NetBanking & Bank Account Configuration</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--muted)">These details generate client QR codes and online payment instructions during appointment booking.</p>
+            </div>
+          </div>
+
+          <form id="admin-payment-form">
+            <h4 style="font:20px var(--serif);color:var(--gold);margin:0 0 14px">UPI Payment Settings</h4>
+            <div class="admin-grid-3">
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                UPI ID (VPA)
+                <input type="text" id="pay-upi-id" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)" placeholder="e.g. business@upi">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Merchant / Business Payee Name
+                <input type="text" id="pay-merchant" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Default Booking Deposit (₹)
+                <input type="number" id="pay-deposit" required min="0" step="50" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+            </div>
+
+            <h4 style="font:20px var(--serif);color:var(--gold);margin:24px 0 14px">Bank Account Transfer (IMPS / NEFT / RTGS)</h4>
+            <div class="admin-grid-2">
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Account Holder Name
+                <input type="text" id="pay-account-holder" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Bank Name
+                <input type="text" id="pay-bank-name" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                Account Number
+                <input type="text" id="pay-account-number" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+
+              <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+                IFSC Code
+                <input type="text" id="pay-ifsc" required style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+              </label>
+            </div>
+
+            <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:14px">
+              Branch & City
+              <input type="text" id="pay-branch" style="background:#10080d;border:1px solid var(--line);padding:12px;color:var(--text)">
+            </label>
+
+            <button type="submit" class="button button-gold" style="margin-top:10px">Save Payment Configuration ↗</button>
+            <span id="payment-save-status" style="margin-left:14px;color:var(--gold);font-size:12px"></span>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL: ADD/EDIT STAFF -->
+  <div class="profile-modal" id="staff-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="staff-modal-close"></div>
+    <div class="modal-panel" style="max-width:540px">
+      <button class="modal-close" id="staff-modal-x">×</button>
+      <span class="eyebrow" id="staff-modal-kicker">STAFF PROFILE</span>
+      <h2 id="staff-modal-title" style="margin:6px 0 18px">Edit Therapist</h2>
+      <form id="staff-form">
+        <input type="hidden" id="staff-id">
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Full Name
+          <input type="text" id="staff-name" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)">
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Professional Title / Role
+          <input type="text" id="staff-role" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)" placeholder="e.g. Senior Massage Therapist">
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Biography & Treatment Specialties
+          <textarea id="staff-bio" rows="3" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)"></textarea>
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Photo URL or Image Link
+          <input type="url" id="staff-photo" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)">
+        </label>
+        <div style="display:flex;gap:12px;margin-top:20px">
+          <button type="submit" class="button button-gold">Save Therapist Profile ↗</button>
+          <button type="button" class="button button-outline" id="staff-modal-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT GALLERY MEDIA -->
+  <div class="profile-modal" id="gallery-modal" aria-hidden="true" role="dialog">
+    <div class="modal-backdrop" id="gallery-modal-close"></div>
+    <div class="modal-panel" style="max-width:540px">
+      <button class="modal-close" id="gallery-modal-x">×</button>
+      <span class="eyebrow" id="gallery-modal-kicker">GALLERY ASSET</span>
+      <h2 id="gallery-modal-title" style="margin:6px 0 18px">Add Media</h2>
+      <form id="gallery-form">
+        <input type="hidden" id="gallery-id">
+        <input type="hidden" id="gallery-type" value="photo">
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Media Title
+          <input type="text" id="gallery-title" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)" placeholder="e.g. Quiet treatment spaces">
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Subtitle / Caption
+          <input type="text" id="gallery-subtitle" style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)" placeholder="e.g. Atmosphere & ambience">
+        </label>
+        <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Media URL (Image or MP4 Video)
+          <input type="url" id="gallery-url" required style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)">
+        </label>
+        <label id="gallery-poster-wrap" style="display:none;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+          Video Poster Image URL
+          <input type="url" id="gallery-poster" style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)">
+        </label>
+        <div style="display:flex;gap:12px;margin-top:20px">
+          <button type="submit" class="button button-gold">Save Gallery Item ↗</button>
+          <button type="button" class="button button-outline" id="gallery-modal-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

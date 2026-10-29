@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160b11">
+  <meta name="description" content="Request a Velvet Touch Spa appointment with seamless online payment and booking.">
+  <title>Book a Visit | Velvet Touch Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+  <div class="velvet-loader" id="loader" role="status" aria-label="Loading Velvet Touch Spa">
+    <div class="loader-velvet"></div>
+    <div class="loader-content">
+      <div class="brand-mark brand-mark-large">VT</div>
+      <p class="loader-name">Velvet Touch <span>S P A</span></p>
+      <div class="loader-line"><i></i></div>
+      <small>PREPARING YOUR MOMENT OF CALM</small>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Velvet Touch Spa home">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" class="main-nav">
+      <a data-page="home" href="index.html">Home</a>
+      <a data-page="about" href="about.html">About</a>
+      <a data-page="services" href="services.html">Services</a>
+      <a data-page="gallery" href="gallery.html">Gallery</a>
+      <a data-page="contact" href="contact.html">Contact</a>
+      <a class="nav-cta active" href="booking.html">Book a Visit ↗</a>
+      <a href="admin.html" style="color:var(--gold);font-size:11px;opacity:0.75" title="Admin Control">⚙ Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-photo"></div>
+      <div class="page-hero-copy">
+        <p class="eyebrow"><span></span> YOUR TIME, YOUR WAY</p>
+        <h1>Make space<br><em>for yourself.</em></h1>
+        <p>Tell us what you have in mind. Choose your desired ritual and secure your slot with instant UPI, NetBanking, or Bank Account payment.</p>
+      </div>
+      <div class="page-hero-bottom">
+        <span>APPOINTMENT REQUEST & INSTANT SECURE CHECKOUT</span>
+        <span>TAKES ABOUT A MINUTE</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="contact-intro">
+        <div>
+          <div class="section-kicker">BOOK A VISIT <span>01 — REQUEST</span></div>
+          <h2>Let's plan your<br><em>next ritual.</em></h2>
+        </div>
+        <p class="intro-copy">
+          Submit your desired service and preferred timing below. You can confirm your appointment immediately with a booking deposit via UPI, NetBanking, or Bank Transfer.
+        </p>
+      </div>
+
+      <form class="contact-form" id="booking-form">
+        <div class="form-row">
+          <label>Your name
+            <input name="name" id="bk-name" required autocomplete="name" placeholder="Full name">
+          </label>
+          <label>Phone / WhatsApp
+            <input name="phone" id="bk-phone" required autocomplete="tel" placeholder="Contact number">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Email
+            <input type="email" name="email" id="bk-email" autocomplete="email" placeholder="you@example.com">
+          </label>
+          <label>Preferred date
+            <input type="date" name="date" id="bk-date" required>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Preferred time
+            <select name="time" id="bk-time">
+              <option>Morning (09:00 AM – 01:00 PM)</option>
+              <option>Afternoon (01:00 PM – 05:00 PM)</option>
+              <option>Evening (05:00 PM – 08:00 PM)</option>
+              <option>Any time</option>
+            </select>
+          </label>
+          <label>Treatment
+            <select name="service" id="bk-service">
+              <option>Swedish Restorative Massage (60 min)</option>
+              <option>Deep-Tissue Aromatherapy Massage (90 min)</option>
+              <option>Hydration & Radiance Facial (60 min)</option>
+              <option>Botanical Exfoliation & Body Scrub (75 min)</option>
+              <option>Couples Wellness Ritual (90 min)</option>
+              <option>Custom Consultation</option>
+            </select>
+          </label>
+        </div>
+        <label>Payment Method
+          <select name="paymentPref" id="bk-paypref">
+            <option value="UPI">UPI (Instant QR, Google Pay, PhonePe, Paytm)</option>
+            <option value="NetBanking">NetBanking (Direct Bank Transfer)</option>
+            <option value="Account">Bank Account Transfer (NEFT / IMPS)</option>
+            <option value="Arrival">Pay Full on Arrival</option>
+          </select>
+        </label>
+        <label>Anything we should know?
+          <textarea name="notes" id="bk-notes" placeholder="Preferences, allergies, or questions"></textarea>
+        </label>
+        <button class="button button-gold" type="submit" id="bk-submit-btn">Continue to Secure Booking & Payment ↗</button>
+        <p class="video-note" id="booking-status" aria-live="polite">Your booking is registered in the spa system; confirmation sent via WhatsApp/Email.</p>
+      </form>
+    </section>
+
+    <!-- PAYMENT MODAL -->
+    <div class="payment-modal" id="payment-modal" role="dialog" aria-modal="true">
+      <div class="payment-box">
+        <button class="modal-close" id="pay-modal-close" style="top:15px;right:20px">×</button>
+        <span class="eyebrow">VELVET TOUCH CHECKOUT</span>
+        <h2 style="font:28px var(--serif);margin:6px 0 10px">Secure Appointment Deposit</h2>
+        <p style="font-size:12px;color:var(--muted)">
+          Deposit Amount: <strong style="color:var(--gold);font-size:16px" id="pay-display-amt">₹500</strong> to confirm your slot with <span id="pay-display-spa">Velvet Touch Spa</span>.
+        </p>
+
+        <div class="payment-tabs">
+          <div class="payment-tab active" data-pane="pane-upi">UPI / QR Code</div>
+          <div class="payment-tab" data-pane="pane-netbanking">NetBanking</div>
+          <div class="payment-tab" data-pane="pane-account">Bank Transfer</div>
+        </div>
+
+        <!-- 1. UPI PANE -->
+        <div class="payment-pane active" id="pane-upi">
+          <div class="upi-qr-wrap">
+            <img id="upi-qr-image" src="" alt="Scan UPI QR Code to pay deposit">
+            <small style="color:#333;font-size:10px;display:block;margin-top:6px;font-weight:600">Scan using any UPI App</small>
+          </div>
+          <div class="copy-pill">
+            <span>UPI ID: <strong id="upi-id-text" style="color:var(--gold)"></strong></span>
+            <button class="copy-btn" id="copy-upi-btn" type="button">Copy</button>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center;margin:12px 0">
+            <a id="upi-intent-link" href="#" class="button button-gold btn-sm" style="flex:1;text-align:center">Open Installed UPI App ↗</a>
+          </div>
+        </div>
+
+        <!-- 2. NETBANKING PANE -->
+        <div class="payment-pane" id="pane-netbanking">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">
+            Select your bank to initiate online transfer to our registered account:
+          </p>
+          <div style="display:grid;gap:8px" id="netbanking-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- 3. DIRECT BANK TRANSFER PANE -->
+        <div class="payment-pane" id="pane-account">
+          <div class="copy-pill">
+            <span>Beneficiary: <strong id="bank-holder-text"></strong></span>
+          </div>
+          <div class="copy-pill">
+            <span>Bank: <strong id="bank-name-text"></strong></span>
+          </div>
+          <div class="copy-pill">
+            <span>Account No: <strong id="bank-acc-text"></strong></span>
+            <button class="copy-btn" id="copy-acc-btn" type="button">Copy</button>
+          </div>
+          <div class="copy-pill">
+            <span>IFSC Code: <strong id="bank-ifsc-text"></strong></span>
+            <button class="copy-btn" id="copy-ifsc-btn" type="button">Copy</button>
+          </div>
+          <div class="copy-pill">
+            <span>Branch: <strong id="bank-branch-text"></strong></span>
+          </div>
+        </div>
+
+        <!-- TRANSACTION CONFIRMATION FORM -->
+        <div style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px">
+          <label style="display:grid;gap:6px;font-size:12px;color:var(--gold);margin-bottom:12px">
+            Enter UPI Ref / Transaction UTR / Note (Optional)
+            <input type="text" id="pay-utr-input" placeholder="e.g. 12-digit UTR or GPay Txn ID" style="background:#10080d;border:1px solid var(--line);padding:10px;color:var(--text)">
+          </label>
+          <button type="button" id="confirm-payment-btn" class="button button-gold" style="width:100%">
+            I Have Made The Payment / Confirm Booking ↗
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <p>Quiet luxury. Thoughtful wellness.</p>
+    <div class="footer-links">
+      <a href="about.html">Our philosophy</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html">Book a visit</a>
+      <a href="admin.html" style="color:var(--gold)">Admin Portal</a>
+    </div>
+    <small>© <span id="year"></span> Velvet Touch Spa.</small>
+  </footer>
+
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Booking Form & Payment Suite Controller
+    (() => {
+      const form = document.getElementById('booking-form');
+      const payModal = document.getElementById('payment-modal');
+      const modalClose = document.getElementById('pay-modal-close');
+      let currentBookingData = null;
+
+      // Set min date to today
+      const dateInput = document.getElementById('bk-date');
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        currentBookingData = data;
+
+        const storeData = window.VTStore.get();
+        const p = storeData.settings?.payment || {};
+
+        if (data.paymentPref === 'Arrival') {
+          // Direct book without upfront deposit
+          const saved = window.VTStore.addBooking({
+            ...data,
+            paymentMethod: 'Pay on Arrival',
+            paymentRef: 'Pay at Reception',
+            amountPaid: 'On Arrival',
+            status: 'Pending'
+          });
+          alert(`Your appointment request [${saved.id}] has been submitted! Our team will contact you on WhatsApp/Phone.`);
+          form.reset();
+          return;
+        }
+
+        // Open Payment Modal
+        openPaymentModal(data, p);
+      });
+
+      function openPaymentModal(booking, p) {
+        const deposit = p.bookingDeposit || 500;
+        const upiId = p.upiId || 'velvettouch@upi';
+        const merchant = p.merchantName || 'Velvet Touch Spa';
+
+        document.getElementById('pay-display-amt').textContent = `₹${deposit}`;
+        document.getElementById('pay-display-spa').textContent = merchant;
+        document.getElementById('upi-id-text').textContent = upiId;
+
+        // Generate UPI URI
+        const upiUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(merchant)}&am=${deposit}&cu=INR&tn=Booking%20Deposit%20${encodeURIComponent(booking.name)}`;
+        document.getElementById('upi-intent-link').href = upiUri;
+
+        // Generate QR code using standard safe QR service
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
+        document.getElementById('upi-qr-image').src = qrUrl;
+
+        // Populate Bank Transfer Tab
+        document.getElementById('bank-holder-text').textContent = p.accountHolder || merchant;
+        document.getElementById('bank-name-text').textContent = p.bankName || 'HDFC Bank';
+        document.getElementById('bank-acc-text').textContent = p.accountNumber || '-';
+        document.getElementById('bank-ifsc-text').textContent = p.ifscCode || '-';
+        document.getElementById('bank-branch-text').textContent = p.branch || 'Calicut';
+
+        // Populate Netbanking banks
+        const nbList = document.getElementById('netbanking-list');
+        nbList.innerHTML = '';
+        (p.netbankingBanks || ['HDFC Bank', 'State Bank of India', 'ICICI Bank', 'Axis Bank', 'Federal Bank']).forEach(bName => {
+          const div = document.createElement('div');
+          div.className = 'copy-pill';
+          div.innerHTML = `<span>${bName} NetBanking</span><span style="color:var(--gold);font-size:11px">Use NEFT to Acc: ${p.accountNumber||''}</span>`;
+          nbList.appendChild(div);
+        });
+
+        // Switch to selected preferred tab
+        document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.payment-pane').forEach(p => p.classList.remove('active'));
+
+        if (booking.paymentPref === 'NetBanking') {
+          document.querySelector('[data-pane="pane-netbanking"]').classList.add('active');
+          document.getElementById('pane-netbanking').classList.add('active');
+        } else if (booking.paymentPref === 'Account') {
+          document.querySelector('[data-pane="pane-account"]').classList.add('active');
+          document.getElementById('pane-account').classList.add('active');
+        } else {
+          document.querySelector('[data-pane="pane-upi"]').classList.add('active');
+          document.getElementById('pane-upi').classList.add('active');
+        }
+
+        payModal.classList.add('open');
+      }
+
+      // Tab switching in payment modal
+      document.querySelectorAll('.payment-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.payment-pane').forEach(p => p.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.pane).classList.add('active');
+        });
+      });
+
+      // Copy helpers
+      document.getElementById('copy-upi-btn').addEventListener('click', () => {
+        const text = document.getElementById('upi-id-text').textContent;
+        navigator.clipboard.writeText(text);
+        alert('UPI ID copied to clipboard!');
+      });
+      document.getElementById('copy-acc-btn').addEventListener('click', () => {
+        const text = document.getElementById('bank-acc-text').textContent;
+        navigator.clipboard.writeText(text);
+        alert('Account number copied to clipboard!');
+      });
+      document.getElementById('copy-ifsc-btn').addEventListener('click', () => {
+        const text = document.getElementById('bank-ifsc-text').textContent;
+        navigator.clipboard.writeText(text);
+        alert('IFSC Code copied to clipboard!');
+      });
+
+      modalClose.addEventListener('click', () => payModal.classList.remove('open'));
+
+      // Confirm Payment Action
+      document.getElementById('confirm-payment-btn').addEventListener('click', () => {
+        if (!currentBookingData) return;
+        const utr = document.getElementById('pay-utr-input').value.trim() || 'Paid via Online Portal';
+        const storeData = window.VTStore.get();
+        const deposit = storeData.settings?.payment?.bookingDeposit || 500;
+
+        const saved = window.VTStore.addBooking({
+          ...currentBookingData,
+          paymentMethod: currentBookingData.paymentPref || 'UPI',
+          paymentRef: utr,
+          amountPaid: `₹${deposit} Advance`,
+          status: 'Confirmed'
+        });
+
+        payModal.classList.remove('open');
+        alert(`Thank you! Your appointment request [${saved.id}] has been secured with payment. An executive will confirm your slot shortly via WhatsApp.`);
+        form.reset();
+
+        // Also trigger WhatsApp confirmation if desired
+        const cleanPhone = (storeData.settings?.whatsapp || '918662449010').replace(/[^0-9]/g, '');
+        const msg = encodeURIComponent(`Hello Velvet Touch Spa, I have booked appointment [${saved.id}] for ${saved.service} on ${saved.date}. Payment Ref: ${utr}`);
+        window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>

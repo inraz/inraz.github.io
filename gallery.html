@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160b11">
+  <meta name="description" content="Browse authentic wellness photographs and videos from Velvet Touch Spa.">
+  <title>Gallery | Velvet Touch Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+  <div class="velvet-loader" id="loader" role="status" aria-label="Loading Velvet Touch Spa">
+    <div class="loader-velvet"></div>
+    <div class="loader-content">
+      <div class="brand-mark brand-mark-large">VT</div>
+      <p class="loader-name">Velvet Touch <span>S P A</span></p>
+      <div class="loader-line"><i></i></div>
+      <small>PREPARING YOUR MOMENT OF CALM</small>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Velvet Touch Spa home">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" class="main-nav">
+      <a data-page="home" href="index.html">Home</a>
+      <a data-page="about" href="about.html">About</a>
+      <a data-page="services" href="services.html">Services</a>
+      <a data-page="gallery" class="active" href="gallery.html">Gallery</a>
+      <a data-page="contact" href="contact.html">Contact</a>
+      <a class="nav-cta" href="booking.html">Book a Visit ↗</a>
+      <a href="admin.html" style="color:var(--gold);font-size:11px;opacity:0.75" title="Admin Control">⚙ Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-photo"></div>
+      <div class="page-hero-copy">
+        <p class="eyebrow"><span></span> A GLIMPSE OF THE EXPERIENCE</p>
+        <h1>Spaces to<br><em>slow down.</em></h1>
+        <p>Explore the serene atmosphere, private treatment suites, and quiet rituals that make every Velvet Touch visit restorative.</p>
+      </div>
+      <div class="page-hero-bottom">
+        <span>PHOTO & VIDEO GALLERY</span>
+        <span>TAKE A LOOK ↓</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-kicker">THE GALLERY <span>01 — PHOTOGRAPHS</span></div>
+      <div class="intro-grid">
+        <h2>A little visual<br><em>room to breathe.</em></h2>
+        <p class="intro-copy">
+          Designed with ambient lighting, gentle natural scents, and soothing acoustic design to cradle you in relaxation from the moment you arrive.
+        </p>
+      </div>
+
+      <div class="gallery-grid" id="photos-grid">
+        <!-- Dynamically rendered photos -->
+      </div>
+
+      <div class="section-kicker" style="margin-top:70px">
+        <span>02 — STUDIO VIDEOS</span>
+        <span>PRESS PLAY TO VIEW</span>
+      </div>
+
+      <div class="gallery-grid" id="videos-grid" style="margin-top:24px">
+        <!-- Dynamically rendered videos -->
+      </div>
+
+      <p class="video-note" style="margin-top:30px">
+        High-definition media can be managed, updated, or replaced anytime via the Velvet Touch Admin Dashboard.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <p>Quiet luxury. Thoughtful wellness.</p>
+    <div class="footer-links">
+      <a href="about.html">Our philosophy</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html">Book a visit</a>
+      <a href="admin.html" style="color:var(--gold)">Admin Portal</a>
+    </div>
+    <small>© <span id="year"></span> Velvet Touch Spa.</small>
+  </footer>
+
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (() => {
+      function renderGalleryItems() {
+        if (!window.VTStore) return;
+        const items = window.VTStore.get().gallery || [];
+        const photoGrid = document.getElementById('photos-grid');
+        const videoGrid = document.getElementById('videos-grid');
+
+        const photos = items.filter(x => x.type === 'photo');
+        const videos = items.filter(x => x.type === 'video');
+
+        if (photoGrid) {
+          photoGrid.innerHTML = photos.map(p => `
+            <figure class="gallery-item">
+              <img loading="lazy" src="${p.url}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=85'">
+              <figcaption>
+                ${p.title}
+                <small>${p.subtitle || ''}</small>
+              </figcaption>
+            </figure>
+          `).join('');
+        }
+
+        if (videoGrid) {
+          videoGrid.innerHTML = videos.map(v => `
+            <figure class="gallery-item">
+              <video controls preload="metadata" poster="${v.poster || ''}">
+                <source src="${v.url}" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption>
+                ${v.title}
+                <small>${v.subtitle || 'Studio video'}</small>
+              </figcaption>
+            </figure>
+          `).join('');
+        }
+      }
+
+      renderGalleryItems();
+      window.addEventListener('vt-data-changed', renderGalleryItems);
+    })();
+  </script>
+</body>
+</html>

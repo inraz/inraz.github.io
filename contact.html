@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#160b11">
+  <meta name="description" content="Contact Velvet Touch Spa by phone, WhatsApp, email, or visit our wellness sanctuary.">
+  <title>Contact | Velvet Touch Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+  <div class="velvet-loader" id="loader" role="status" aria-label="Loading Velvet Touch Spa">
+    <div class="loader-velvet"></div>
+    <div class="loader-content">
+      <div class="brand-mark brand-mark-large">VT</div>
+      <p class="loader-name">Velvet Touch <span>S P A</span></p>
+      <div class="loader-line"><i></i></div>
+      <small>PREPARING YOUR MOMENT OF CALM</small>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Velvet Touch Spa home">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" class="main-nav">
+      <a data-page="home" href="index.html">Home</a>
+      <a data-page="about" href="about.html">About</a>
+      <a data-page="services" href="services.html">Services</a>
+      <a data-page="gallery" href="gallery.html">Gallery</a>
+      <a data-page="contact" class="active" href="contact.html">Contact</a>
+      <a class="nav-cta" href="booking.html">Book a Visit ↗</a>
+      <a href="admin.html" style="color:var(--gold);font-size:11px;opacity:0.75" title="Admin Control">⚙ Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-photo"></div>
+      <div class="page-hero-copy">
+        <p class="eyebrow"><span></span> WE WOULD LOVE TO HEAR FROM YOU</p>
+        <h1>Let's make room<br><em>for your wellbeing.</em></h1>
+        <p>Ask a question, find directions, or speak directly with our reception team about choosing the right treatment.</p>
+      </div>
+      <div class="page-hero-bottom">
+        <span>CONTACT VELVET TOUCH</span>
+        <span>WE'RE HERE TO HELP</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="contact-intro">
+        <div>
+          <div class="section-kicker">GET IN TOUCH <span>01 — CONTACT</span></div>
+          <h2>One small step<br><em>toward calm.</em></h2>
+        </div>
+        <p class="intro-copy">
+          Connect directly via direct telephone, WhatsApp, email, or plan your arrival using our location map below.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <div class="icon">☎</div>
+          <h3>Call us</h3>
+          <p>Speak directly with our sanctuary reception regarding appointments or special requests.</p>
+          <a class="under-link" id="contact-phone-link" href="tel:+918662449010">+91 86624 49010</a>
+        </article>
+
+        <article class="contact-card">
+          <div class="icon">◉</div>
+          <h3>WhatsApp</h3>
+          <p>Quick responses, customized consultation, and easy appointment coordination.</p>
+          <a class="under-link" id="contact-wa-link" href="https://wa.me/918662449010" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+        </article>
+
+        <article class="contact-card">
+          <div class="icon">⌖</div>
+          <h3>Visit our sanctuary</h3>
+          <p id="contact-address-text">Velvet Touch Sanctuary, Wayanad Road, Kozhikode, Kerala</p>
+          <a class="under-link" id="contact-maps-link" href="https://maps.google.com" target="_blank" rel="noopener">Open Google Maps ↗</a>
+        </article>
+
+        <article class="contact-card">
+          <div class="icon">✉</div>
+          <h3>Email</h3>
+          <p>For detailed inquiries, corporate wellness arrangements, or feedback.</p>
+          <a class="under-link" id="contact-email-link" href="mailto:care@velvettouch.example">care@velvettouch.example</a>
+        </article>
+      </div>
+
+      <div class="booking-section" style="margin-top:65px">
+        <div>
+          <div class="section-kicker">OPENING HOURS</div>
+          <h2>Find a time<br><em>that suits you.</em></h2>
+          <div class="hours-list" id="contact-hours-list">
+            <div><span>Monday – Friday</span><strong>9:00 AM – 8:00 PM</strong></div>
+            <div><span>Saturday</span><strong>9:00 AM – 8:00 PM</strong></div>
+            <div><span>Sunday</span><strong>10:00 AM – 6:00 PM</strong></div>
+          </div>
+          <p class="video-note">*Special timings or early morning slots can be arranged on request.</p>
+        </div>
+
+        <div>
+          <div class="section-kicker">SEND AN ENQUIRY</div>
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <label>Your name
+                <input name="name" required autocomplete="name" placeholder="Full name">
+              </label>
+              <label>Phone or WhatsApp
+                <input name="phone" required autocomplete="tel" placeholder="Contact number">
+              </label>
+            </div>
+            <label>Email address
+              <input type="email" name="email" autocomplete="email" placeholder="you@example.com">
+            </label>
+            <label>What can we help with?
+              <select name="topic">
+                <option>General enquiry</option>
+                <option>Massage therapy & body treatments</option>
+                <option>Facial care & skin rituals</option>
+                <option>Couples wellness packages</option>
+                <option>Booking / availability check</option>
+                <option>Accessibility or comfort request</option>
+              </select>
+            </label>
+            <label>Message
+              <textarea name="message" required placeholder="Tell us a little about what you need..."></textarea>
+            </label>
+            <button class="button button-gold" type="submit">Submit Enquiry ↗</button>
+            <p class="video-note" id="form-status" aria-live="polite">Messages are instantly registered in our administration inbox.</p>
+          </form>
+        </div>
+      </div>
+
+      <div style="margin-top:65px">
+        <div class="section-kicker">FIND US <span>MAP LOCATION</span></div>
+        <p class="intro-copy">Convenient access with private guest parking and tranquil surroundings.</p>
+        <iframe id="contact-map-iframe" class="map-frame" title="Map to Velvet Touch Spa" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=spa%20near%20Kozhikode%20Kerala&output=embed"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">VT</span>
+      <span class="brand-copy">Velvet Touch<small>S P A</small></span>
+    </a>
+    <p>Quiet luxury. Thoughtful wellness.</p>
+    <div class="footer-links">
+      <a href="about.html">Our philosophy</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="booking.html">Book a visit</a>
+      <a href="admin.html" style="color:var(--gold)">Admin Portal</a>
+    </div>
+    <small>© <span id="year"></span> Velvet Touch Spa.</small>
+  </footer>
+
+  <script src="store.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Sync contact page elements with admin store
+    (() => {
+      function syncContactUI() {
+        if (!window.VTStore) return;
+        const s = window.VTStore.get().settings || {};
+
+        if (s.phone) {
+          const pLink = document.getElementById('contact-phone-link');
+          if (pLink) {
+            pLink.href = 'tel:' + s.phone.replace(/\s+/g, '');
+            pLink.textContent = s.phone;
+          }
+        }
+
+        if (s.whatsapp) {
+          const waLink = document.getElementById('contact-wa-link');
+          if (waLink) {
+            const clean = s.whatsapp.replace(/[^0-9]/g, '');
+            const msg = encodeURIComponent(s.whatsappMsg || 'Hello Velvet Touch Spa');
+            waLink.href = `https://wa.me/${clean}?text=${msg}`;
+          }
+        }
+
+        if (s.email) {
+          const emLink = document.getElementById('contact-email-link');
+          if (emLink) {
+            emLink.href = 'mailto:' + s.email;
+            emLink.textContent = s.email;
+          }
+        }
+
+        if (s.address) {
+          const addr = document.getElementById('contact-address-text');
+          if (addr) addr.textContent = s.address;
+          const mapsLink = document.getElementById('contact-maps-link');
+          if (mapsLink) mapsLink.href = `https://maps.google.com/?q=${encodeURIComponent(s.address)}`;
+        }
+
+        if (s.mapEmbed) {
+          const iframe = document.getElementById('contact-map-iframe');
+          if (iframe) iframe.src = s.mapEmbed;
+        }
+
+        if (s.hours && s.hours.length) {
+          const hl = document.getElementById('contact-hours-list');
+          if (hl) {
+            hl.innerHTML = s.hours.map(h => `<div><span>${h.days}</span><strong>${h.time}</strong></div>`).join('');
+          }
+        }
+      }
+
+      syncContactUI();
+      window.addEventListener('vt-data-changed', syncContactUI);
+
+      // Handle Contact Form Submission
+      const form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = Object.fromEntries(new FormData(form).entries());
+          const saved = window.VTStore.addEnquiry(data);
+
+          const status = document.getElementById('form-status');
+          if (status) {
+            status.textContent = `Enquiry [${saved.id}] received! Our team will respond promptly.`;
+            status.style.color = 'var(--gold)';
+          }
+
+          alert(`Thank you, ${data.name}. Your enquiry [${saved.id}] has been submitted to the management inbox.`);
+          form.reset();
+
+          // Offer immediate WhatsApp escalation if desired
+          const s = window.VTStore.get().settings || {};
+          const cleanWa = (s.whatsapp || '918662449010').replace(/[^0-9]/g, '');
+          const waText = encodeURIComponent(`Hi Velvet Touch Spa, I just submitted an enquiry [${saved.id}] regarding: ${data.topic}`);
+          if (confirm('Would you also like to send this query directly on WhatsApp for faster reply?')) {
+            window.open(`https://wa.me/${cleanWa}?text=${waText}`, '_blank');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
